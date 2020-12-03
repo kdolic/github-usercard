@@ -8,8 +8,9 @@ console.log(axios);
 axios
 .get('https://api.github.com/users/kdolic')
 .then((res) => {
-  const git = res.data;
-  console.log(git);
+  console.log(res.data);
+  const cards = document.querySelector('.cards');
+  cards.appendChild(cardMaker(res));
 })
 .catch((err) =>{
   console.log('ERROR: Something is not right', err);
@@ -39,7 +40,7 @@ axios
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -108,13 +109,13 @@ function cardMaker(object){
   image.src = object.data.avatar_url;
   name.textContent = object.data.name;
   userName.textContent = object.data.login;
-  location.textContent = object.data.location;
+  location.textContent = `Location: ${object.data.location}`;
   profileLink.href = object.data.html_url;
-  followers.textContent = object.data.followers;
-  following.textContent = object.data.following;
-  bio.textContent = object.data.bio;
+  followers.textContent = `Followers: ${object.data.followers}`;
+  following.textContent = `Following: ${object.data.following}`;
+  bio.textContent = `Bio: ${object.data.bio}`;
 
 // Return
   return card;
-  
+
 }
