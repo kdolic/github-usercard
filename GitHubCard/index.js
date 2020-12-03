@@ -1,9 +1,19 @@
+import axios from 'axios';
+console.log(axios);
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+axios
+.get('https://api.github.com/users/kdolic')
+.then((res) => {
+  const git = res.data;
+  console.log(git);
+})
+.catch((err) =>{
+  console.log('ERROR: Something is not right', err);
+});
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -11,6 +21,7 @@
 
     Skip to STEP 3.
 */
+
 
 /*
   STEP 4: Pass the data received from Github into your function,
@@ -58,3 +69,52 @@ const followersArray = [];
     luishrd
     bigknell
 */
+
+function cardMaker(object){
+
+  // Elements
+  const card = document.createElement('div');
+  const image = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const name = document.createElement('h3');
+  const userName = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const profileLink = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  // Append
+  card.appendChild(image);
+  card.appendChild(cardInfo);
+
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  // Classes
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  name.classList.add('name');
+  userName.classList.add('username');
+
+// textContent / Attributes
+  image.src = object.data.avatar_url;
+  name.textContent = object.data.name;
+  userName.textContent = object.data.login;
+  location.textContent = object.data.location;
+  profileLink.href = object.data.html_url;
+  followers.textContent = object.data.followers;
+  following.textContent = object.data.following;
+  bio.textContent = object.data.bio;
+
+// Return
+  return card;
+  
+}
