@@ -95,19 +95,6 @@ function cardMaker(object){
   const following = document.createElement('p');
   const bio = document.createElement('p');
 
-  // Append
-  card.appendChild(image);
-  card.appendChild(cardInfo);
-
-  cardInfo.appendChild(name);
-  cardInfo.appendChild(userName);
-  cardInfo.appendChild(location);
-  cardInfo.appendChild(profile);
-  profile.appendChild(profileLink);
-  cardInfo.appendChild(followers);
-  cardInfo.appendChild(following);
-  cardInfo.appendChild(bio);
-
   // Classes
   card.classList.add('card');
   cardInfo.classList.add('card-info');
@@ -119,10 +106,26 @@ function cardMaker(object){
   name.textContent = object.data.name;
   userName.textContent = object.data.login;
   location.textContent = `Location: ${object.data.location}`;
-  profileLink.href = object.data.html_url;
+  profile.textContent = `Profile: `;
+  profileLink.setAttribute('href', object.data.html_url);
+  profileLink.innerHTML = object.data.html_url;
   followers.textContent = `Followers: ${object.data.followers}`;
   following.textContent = `Following: ${object.data.following}`;
   bio.textContent = `Bio: ${object.data.bio}`;
+
+
+   // Append
+   card.appendChild(image);
+   card.appendChild(cardInfo);
+ 
+   cardInfo.appendChild(name);
+   cardInfo.appendChild(userName);
+   cardInfo.appendChild(location);
+   cardInfo.appendChild(profile);
+   profile.appendChild(profileLink);
+   cardInfo.appendChild(followers);
+   cardInfo.appendChild(following);
+   cardInfo.appendChild(bio);
 
 // Return
   return card;
